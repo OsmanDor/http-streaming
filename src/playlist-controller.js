@@ -1934,6 +1934,12 @@ export class PlaylistController extends videojs.EventTarget {
         return;
       }
 
+      // If there is no audio coded, add the default coded
+      if(!variantCodecs.audio) {
+        variantCodecs.audio = DEFAULT_AUDIO_CODEC; // set the default if there is no audio codec found
+        variantCodecCount = codecCount(variantCodecs); // Count again
+      }
+      
       // TODO: we can support this by removing the
       // old media source and creating a new one, but it will take some work.
       // The number of streams cannot change
